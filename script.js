@@ -42,9 +42,10 @@ var app = new Vue({
     
     popBubble: function(index) {
       if (this.timer > 0) {
-        this.score++;
-            
         var bubble = this.bubbles[index];
+        var points = 250 / bubble.size;
+        this.score += points;
+        this.score = parseFloat(this.score.toFixed(2));
         bubble.size = this.getRandom(25, 250);
         bubble.x = this.getRandom(0, $(window).width()-bubble.size);
         bubble.y = this.getRandom(0, $(window).height()-bubble.size);

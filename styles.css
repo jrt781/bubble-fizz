@@ -27,6 +27,24 @@ body {
   font-size: 2em;
 }
 
+.numbers {
+  min-width: 100px;
+}
+
+table { 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  text-align: right;
+}
+
+td {
+  text-align: left;
+  width: 100px;
+}
+
 html, body {margin: 0; height: 100%; overflow: hidden}
 
 #startGameButton {
