@@ -6,24 +6,21 @@
     <title>Bubbles</title>
   </head>
   <body>
-    <header>
-      
-    </header>
     
     <div id="game">
       <div v-if="gameOn">
         <div id="score">
-          {{score}}<br />{{timer}}
+          {{timer}} s
         </div>    
         <div v-for="(bubble, index) in bubbles" :style="'width:'+bubble.size+'px;height:'+bubble.size+'px;top:'+bubble.y+'px;left:'+bubble.x+'px;background-color:'+bubble.color+';'" class="bubble" v-on:click="popBubble(index)"></div>
-      </div>
+      </div>      
       <div v-else>
         <h1>Bubbles</h1>
-        <div v-if="bestTimeYet">
-          <p>Best Time: {{bestTime}}</p>
+        <button v-on:click="startGame" id="startGameButton">Start Game</button>
+        <div id="times" v-if="bestTimeYet">
+          <p>Time: {{timer}} s</p>
+          <p>Best Time: {{bestTime}} s</p>
         </div>
-        <br />
-        <button v-on:click="startGame">Start Game</button>
         <footer>
           <a href="https://github.com/jrt781/bubbles">Github classroom link</a>
         </footer>

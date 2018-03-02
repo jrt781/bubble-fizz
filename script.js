@@ -12,6 +12,16 @@ var app = new Vue({
     bestTime: 0,
     bestTimeYet: false,
   },
+  created() {
+    var random_number = Math.floor(Math.random() * this.colors.length);
+    var random_color = this.colors[random_number];
+    $('#startGameButton').css('background-color', random_color);
+    if (random_number % 2 == 0) {
+      $('#startGameButton').css('color', "white");
+    } else {
+      $('#startGameButton').css('color', "black");
+    }
+  },
   methods: {
     popBubble: function(index) {
       this.score++;
@@ -22,7 +32,7 @@ var app = new Vue({
         if (this.bestTimeYet == false) {
           this.bestTime = this.timer;
         }
-        this.bestTime = Math.min(this.bestTime, this.timer);
+        this.bestTime = Math.min(this.bestTime, this.timer).toFixed(1);
         this.bestTimeYet = true;
         
       }

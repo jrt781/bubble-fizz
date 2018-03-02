@@ -11,12 +11,13 @@ body {
 h1 {
   font-family: 'Coiny', cursive;
   font-size: 8em;
-  margin: 50px 0 0 0;
+  margin: 50px 0 -20px 0;
+  padding-bottom: 0;
 }
 
 html, body {margin: 0; height: 100%; overflow: hidden}
 
-button {
+#startGameButton {
     border-radius: 8px;
     border: none;
     color: white;
@@ -27,35 +28,27 @@ button {
     font-size: 3em;
     margin: 4px 2px;
     cursor: pointer;
-    background-color: #6600CC;
     font-family: 'Righteous', cursive;
 }
 
-button:hover {
+#startGameButton:hover {
   background-color: #4488FF;
 }
 
 footer {
   text-align: center;
-  background-color: #ccc;
   position: absolute;
   bottom:0;
   width: 100%;
-  height: 20px;
-  padding: 15px 0;
+  padding-bottom: 10px;
 }
 
 footer a {
   color: black;
 }
 
-header {
-  background-color: #ccc;
-  position: absolute;
-  top:0;
-  width: 100%;
-  height: 20px;
-  padding: 15px 0;
+#times {
+  font-size: 2em;
 }
 
 .bubble {
