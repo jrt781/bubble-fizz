@@ -1,24 +1,38 @@
 body {
-    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     padding: 20px 100px 0px 100px;
     background: white;
     text-align: center;
     padding: 0;
     margin: 0;
+    font-family: 'Righteous', cursive;
+}
+
+h1 {
+  font-family: 'Coiny', cursive;
+  font-size: 8em;
+  margin: 50px 0 0 0;
 }
 
 html, body {margin: 0; height: 100%; overflow: hidden}
 
 button {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 3em;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #6600CC;
+    font-family: 'Righteous', cursive;
 }
 
-textarea {
-    width: 100%;
-    max-width: 500px;
-    height: 100px;
+button:hover {
+  background-color: #4488FF;
 }
 
 footer {
@@ -27,7 +41,21 @@ footer {
   position: absolute;
   bottom:0;
   width: 100%;
-  padding: 10px 0;
+  height: 20px;
+  padding: 15px 0;
+}
+
+footer a {
+  color: black;
+}
+
+header {
+  background-color: #ccc;
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 20px;
+  padding: 15px 0;
 }
 
 .bubble {

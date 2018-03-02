@@ -3,12 +3,14 @@ var app = new Vue({
   data: {
     gameOn: false,
     score: 0,
-    bubbles: [{x:300,y:100,size:'250',color:'red'},
-    {x:700,y:200,size:'150',color:'green'},
-    {x:600,y:200,size:'40',color:'blue'},
-    {x:375,y:230,size:'97',color:'green'},
-    {x:256,y:836,size:'150',color:'cyan'},
-            ],
+    bubbles: [],
+    colors: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00",
+             "#FF00FF", "#00FFFF", "#FF4488", "#00CC66",
+             "#6600CC", "#44FF88", "#4488FF", "#FFAA22"],
+    timer: 0,
+    interval: 0,
+    bestTime: 0,
+    bestTimeYet: false,
   },
   methods: {
     popBubble: function(index) {
@@ -16,6 +18,13 @@ var app = new Vue({
       this.bubbles.splice(index,1);
       if (this.bubbles.length == 0) {
         this.gameOn = false;
+        clearInterval(this.interval);
+        if (this.bestTimeYet == false) {
+          this.bestTime = this.timer;
+        }
+        this.bestTime = Math.min(this.bestTime, this.timer);
+        this.bestTimeYet = true;
+        
       }
     },
     
@@ -23,12 +32,17 @@ var app = new Vue({
       this.bubbles = [];
       for (var i = 0; i < 10; i++) {
         var bubble = {};
-        bubble.x = this.getRandom(0, $(window).width());
-        bubble.y = this.getRandom(0, $(window).height());
         bubble.size = this.getRandom(10, 250);
-        bubble.color = "green";
+        bubble.x = this.getRandom(0, $(window).width()-bubble.size);
+        bubble.y = this.getRandom(0, $(window).height()-bubble.size);
+        bubble.color = this.colors[this.getRandom(1, 12)];
         this.bubbles.push(bubble);
       }
+      var startTime = new Date().getTime();
+      var v = this;
+      this.interval = setInterval(function () {
+        v.timer = (((new Date().getTime())-startTime)/1000).toFixed(1);
+      }, 100);
       this.gameOn = true;
     },
 
