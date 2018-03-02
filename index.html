@@ -6,20 +6,27 @@
     <title>Bubbles</title>
   </head>
   <body>
-    
     <div id="game">
       <div v-if="gameOn">
-        <div id="score">
-          {{timer}} s
+        <div id="gameData">
+          Time left: {{timer}} s
+          <br />
+          Score: {{score}}
         </div>    
-        <div v-for="(bubble, index) in bubbles" :style="'width:'+bubble.size+'px;height:'+bubble.size+'px;top:'+bubble.y+'px;left:'+bubble.x+'px;background-color:'+bubble.color+';'" class="bubble" v-on:click="popBubble(index)"></div>
+        <div v-for="(bubble, index) in bubbles"
+         :style="'width:'+bubble.size+'px;height:'+bubble.size+'px;top:'+bubble.y+'px;left:'+bubble.x+'px;background-color:'+bubble.color+';'" 
+         class="bubble" 
+         v-on:click="popBubble(index)"></div>
+        <div id="gameDoneDiv" v-if="gameDone">
+          <h1>Final score: {{score}}</h1>
+          <h2>Press the spacebar to continue</h2>
+        </div>
       </div>      
       <div v-else>
-        <h1>Bubbles</h1>
+        <h1 id="title">Bubbles</h1>
         <button v-on:click="startGame" id="startGameButton">Start Game</button>
-        <div id="times" v-if="bestTimeYet">
-          <p>Time: {{timer}} s</p>
-          <p>Best Time: {{bestTime}} s</p>
+        <div id="frontScores" v-if="scoreYet">
+          <p>High Score: {{bestScore}}</p>
         </div>
         <footer>
           <a href="https://github.com/jrt781/bubbles">Github classroom link</a>

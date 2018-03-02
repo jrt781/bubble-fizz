@@ -2,17 +2,19 @@ var app = new Vue({
   el: '#game',
   data: {
     gameOn: false,
-    score: 0,
     bubbles: [],
     colors: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00",
              "#FF00FF", "#00FFFF", "#FF4488", "#00CC66",
              "#6600CC", "#44FF88", "#4488FF", "#FFAA22"],
     timer: 0,
     interval: 0,
-    bestTime: 0,
-    bestTimeYet: false,
+    score: 0,
+    bestScore: 0,
+    scoreYet: false,
+    gameDone: false,
   },
   created() {
+    window.addEventListener('keyup', this.backToHomeScreen);
     var random_number = Math.floor(Math.random() * this.colors.length);
     var random_color = this.colors[random_number];
     $('#startGameButton').css('background-color', random_color);
@@ -23,26 +25,39 @@ var app = new Vue({
     }
   },
   methods: {
-    popBubble: function(index) {
-      this.score++;
-      this.bubbles.splice(index,1);
-      if (this.bubbles.length == 0) {
+    backToHomeScreen: function(event) {
+      if (event.which == 32 && this.gameDone) {
+        this.gameDone = false;
         this.gameOn = false;
-        clearInterval(this.interval);
-        if (this.bestTimeYet == false) {
-          this.bestTime = this.timer;
+        var random_number = Math.floor(Math.random() * this.colors.length);
+        var random_color = this.colors[random_number];
+        $('#startGameButton').css('background-color', random_color);
+        if (random_number % 2 == 0) {
+          $('#startGameButton').css('color', "white");
+        } else {
+          $('#startGameButton').css('color', "black");
         }
-        this.bestTime = Math.min(this.bestTime, this.timer).toFixed(1);
-        this.bestTimeYet = true;
-        
+      }
+    },
+    
+    popBubble: function(index) {
+      if (this.timer > 0) {
+        this.score++;
+            
+        var bubble = this.bubbles[index];
+        bubble.size = this.getRandom(25, 250);
+        bubble.x = this.getRandom(0, $(window).width()-bubble.size);
+        bubble.y = this.getRandom(0, $(window).height()-bubble.size);
+        bubble.color = this.colors[this.getRandom(1, 12)];
       }
     },
     
     startGame: function() {
       this.bubbles = [];
+      this.score = 0;
       for (var i = 0; i < 10; i++) {
         var bubble = {};
-        bubble.size = this.getRandom(10, 250);
+        bubble.size = this.getRandom(25, 250);
         bubble.x = this.getRandom(0, $(window).width()-bubble.size);
         bubble.y = this.getRandom(0, $(window).height()-bubble.size);
         bubble.color = this.colors[this.getRandom(1, 12)];
@@ -50,8 +65,17 @@ var app = new Vue({
       }
       var startTime = new Date().getTime();
       var v = this;
+      this.timer = 15;
       this.interval = setInterval(function () {
-        v.timer = (((new Date().getTime())-startTime)/1000).toFixed(1);
+        v.timer -= 0.1;
+        if (v.timer <= 0) {
+          v.timer = 0;
+          clearInterval(v.interval);
+          v.bestScore = Math.max(v.bestScore, v.score);
+          v.scoreYet = true;
+          v.gameDone = true;
+        }
+        v.timer = v.timer.toFixed(1);
       }, 100);
       this.gameOn = true;
     },
@@ -60,18 +84,6 @@ var app = new Vue({
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum and minimum are inclusive 
-    },
-    
-    addComment: function() {
-      if (!(this.number in this.comments)) {
-	      Vue.set(app.comments, this.number, new Array);
-      }
-      var currentTime = Date();
-      var d = new Date();
-      var n = d.toLocaleString();
-      this.comments[this.number].push({author:this.addedName,text:this.addedComment,date:n});
-      this.addedName = '';
-      this.addedComment = '';
     },
   }
 });

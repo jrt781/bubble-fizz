@@ -8,11 +8,23 @@ body {
     font-family: 'Righteous', cursive;
 }
 
-h1 {
+#title {
   font-family: 'Coiny', cursive;
   font-size: 8em;
   margin: 50px 0 -20px 0;
   padding-bottom: 0;
+}
+
+#gameDoneDiv h1 {
+  font-size: 5em;
+}
+
+#gameDoneDiv h2 {
+  font-size: 3em;
+}
+
+#gameData {
+  font-size: 2em;
 }
 
 html, body {margin: 0; height: 100%; overflow: hidden}
@@ -47,7 +59,7 @@ footer a {
   color: black;
 }
 
-#times {
+#frontScores {
   font-size: 2em;
 }
 
