@@ -10,64 +10,19 @@ var app = new Vue({
     interval: 0,
     score: 0,
     bestScore: 0,
-    scoreYet: false,
     gameDone: false,
-    buttonBackgroundColor: "black",
-    buttonTextColor: "white",
-    tooltipBackgroundColor: "black",
-    tooltipTextColor: "white",
+    gameType: "bubbles"
   },
+  
   created() {
-    window.addEventListener('keyup', this.backToHomeScreen);
-    
-    var random_number = Math.floor(Math.random() * this.colors.length);
-    var random_color = this.colors[random_number];
-    this.buttonBackgroundColor = random_color;
-    if (random_number % 2 == 0) {
-      this.buttonTextColor = "white";
-    } else {
-      this.buttonTextColor = "black";
-    }
-    
-    var random_number2 = Math.floor(Math.random() * this.colors.length);
-    while (random_number2 == random_number) {
-      random_number2 = Math.floor(Math.random() * this.colors.length);
-    }
-    var random_color2 = this.colors[random_number2];
-    this.tooltipBackgroundColor = random_color2;
-    if (random_number2 % 2 == 0) {
-      this.tooltipTextColor = "white";
-    } else {
-      this.tooltipTextColor = "black";
-    }
-    
+    window.addEventListener('keyup', this.backToHomeScreen)
   },
+  
   methods: {
     backToHomeScreen: function(event) {
       if (event.which == 32 && this.gameDone) {
         this.gameDone = false;
         this.gameOn = false;
-        
-        var random_number = Math.floor(Math.random() * this.colors.length);
-        var random_color = this.colors[random_number];
-        this.buttonBackgroundColor = random_color;
-        if (random_number % 2 == 0) {
-          this.buttonTextColor = "white";
-        } else {
-          this.buttonTextColor = "black";
-        }
-        
-        var random_number2 = Math.floor(Math.random() * this.colors.length);
-        while (random_number2 == random_number) {
-          random_number2 = Math.floor(Math.random() * this.colors.length);
-        }
-        var random_color2 = this.colors[random_number2];
-        this.tooltipBackgroundColor = random_color2;
-        if (random_number2 % 2 == 0) {
-          this.tooltipTextColor = "white";
-        } else {
-          this.tooltipTextColor = "black";
-        }
       }
     },
     
@@ -84,7 +39,7 @@ var app = new Vue({
       }
     },
     
-    startGame: function() {
+    startBubbles: function() {
       this.bubbles = [];
       this.score = 0;
       for (var i = 0; i < 10; i++) {
@@ -104,7 +59,6 @@ var app = new Vue({
           v.timer = 0;
           clearInterval(v.interval);
           v.bestScore = Math.max(v.bestScore, v.score);
-          v.scoreYet = true;
           v.gameDone = true;
         }
         v.timer = v.timer.toFixed(1);

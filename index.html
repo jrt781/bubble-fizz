@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles/styles.css"/>
+    <link rel="stylesheet" href="styles/front.css"/>
+    <link rel="stylesheet" href="styles/game.css"/>
     <link href="https://fonts.googleapis.com/css?family=Coiny|Righteous|Ubuntu+Mono" rel="stylesheet"> 
     <title>Bubbles</title>
   </head>
   <body>
+    <div id="backdrop"></div>
+    <div id="exitPopup">x</div>
+    <div class="popuptext" id="fizzInstructions">
+      You have 15 seconds to pop as many bubbles (by clicking them) 
+      and get as many points as you can! When you pop bubbles, new 
+      ones appear. Smaller bubbles are worth more points. Try to get 
+      the highest score possible!
+    </div>
+
     <div id="game">
+      
+      
+      
+      
+      
       <div v-if="gameOn">
         <div id="gameData">
           <table>
-            <tr>
-              <th>
-                Time: 
-              </th>
-              <td>
-                {{timer}}s
-              </td>
-            </tr>
-            <tr>
-              <th>
-                Score:  
-              </th>
-              <td>
-                {{score}}
-              </td>
-            </tr>
+            <tr><th>Time: </th><td>{{timer}}s</td></tr>
+            <tr><th>Score: </th><td>{{score}}</td></tr>
           </table>
         </div>    
         <div v-for="(bubble, index) in bubbles"
@@ -36,32 +38,82 @@
           <h1>Final score: {{score}}</h1>
           <h2>Press the spacebar to continue</h2>
         </div>
-      </div>      
-      <div v-else>
-        <h1 id="title">Bubbles</h1>
-        <button v-on:click="startGame" id="startGameButton"
-        :style="'color:'+buttonTextColor+';background-color:'+buttonBackgroundColor+';'">Start Game</button>
-        <div id="frontScores" v-if="scoreYet">
-          <p>High Score: {{bestScore}}</p>
-        </div>
-        <div class="tooltip">How to play!
-          <span class="tooltiptext"
-          :style="'color:'+tooltipTextColor+';background-color:'+tooltipBackgroundColor+';'">
-            You have 15 seconds to pop as many bubbles 
-            (by clicking them) and get as many points as you can! When you pop 
-            bubbles, new ones appear. Smaller bubbles are worth more points.
-            Try to get the highest score possible!</span>
-        </div>
-        <footer>
-          <a href="https://github.com/jrt781/bubbles">Github classroom link</a>
-        </footer>
       </div>
-    </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      <div v-else>
+        <h1 id="title">BubbleFizz</h1>
+        <div id="gameButtonsDiv">
+          <div id="bubblesGame" class="gameButtonDiv">
+            <button v-on:click="startBubbles" 
+            id="startBubblesButton" 
+            class="startGameButton">Play Bubbles</button>
+          </div>
+          <div id="fizzGame" class="gameButtonDiv">
+            <button v-on:click="startBubbles" 
+            id="startFizzButton"
+            class="startGameButton">Play Fizz</button>
+            <br />
+            <button class="popup" 
+            onclick="showPopup('fizzInstructions')">
+            Fizz Instructions</button>
+          </div>
+          <div id="impactGame" class="gameButtonDiv">
+            <button v-on:click="startBubbles" 
+            id="startImpactButton" 
+            class="startGameButton">Play Impact</button>
+          </div>
+        </div>
+      </div>      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div> <!-- END VUE ELEMENT -->
+    
+    
+    <footer>
+      <a href="https://github.com/jrt781/bubble-fizz">Github classroom link</a>
+    </footer>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
     <script src="script.js"></script>
-    
+    <script>
+      function showPopup(id) {
+        var popup = document.getElementById(id);
+        popup.style.display = "block";
+        var backdrop = document.getElementById("backdrop");
+        backdrop.style.display = "block";
+        var exit = document.getElementById("exitPopup");
+        exit.style.display = "block";
+        exit.onclick = function(){ closePopup(id); }
+      }
+      
+      function closePopup(id) {
+        var popup = document.getElementById(id);
+        popup.style.display = "none";
+        var backdrop = document.getElementById("backdrop");
+        backdrop.style.display = "none";
+        var exit = document.getElementById("exitPopup");
+        exit.style.display = "none";
+      }
+    </script>
   </body>
 </html>

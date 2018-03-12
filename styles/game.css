@@ -1,0 +1,31 @@
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+#gameDoneDiv h1 {
+  font-size: 5em;
+}
+
+#gameDoneDiv h2 {
+  font-size: 3em;
+}
+
+#gameData {
+  font-size: 2em;
+}
+
+#gameData table { 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#gameData th {
+  text-align: right;
+}
+
+#gameData td {
+  text-align: left;
+  width: 100px;
+}
