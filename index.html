@@ -4,20 +4,44 @@
     <link rel="stylesheet" href="styles/styles.css"/>
     <link rel="stylesheet" href="styles/front.css"/>
     <link rel="stylesheet" href="styles/game.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Coiny|Righteous|Ubuntu+Mono" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Coiny|Righteous|Ubuntu+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">  
     <title>Bubbles</title>
   </head>
   <body>
     <div id="backdrop"></div>
     <div id="exitPopup">x</div>
-    <div class="popuptext" id="fizzInstructions">
+    <div class="popuptext" id="bubblesInstructions">
       You have 15 seconds to pop as many bubbles (by clicking them) 
       and get as many points as you can! When you pop bubbles, new 
       ones appear. Smaller bubbles are worth more points. Try to get 
       the highest score possible!
     </div>
+    <div class="popuptext" id="fizzInstructions">
+      You have 15 seconds to pop as many bubbles (by clicking them) 
+      and get as many points as you can! When you pop bubbles, new 
+      ones appear. <b>The bubbles will be moving and bouncing around.</b> 
+      Smaller bubbles are worth more points, <b>as well as bubbles that 
+      are moving faster.</b> Try to get the highest score possible!
+    </div>
+    <div class="popuptext" id="impactInstructions">
+      You have 15 seconds to pop as many bubbles (by clicking them) 
+      and get as many points as you can! When you pop bubbles, new 
+      ones appear. Smaller bubbles are worth more points. <b>When you 
+      pop a bubble, it will push all the other bubbles away.</b> Try to 
+      get the highest score possible!
+    </div>
+
+
+
+
+
 
     <div id="game">
+      
+      
+      
+      
       
       
       
@@ -26,7 +50,7 @@
       <div v-if="gameOn">
         <div id="gameData">
           <table>
-            <tr><th>Time: </th><td>{{timer}}s</td></tr>
+            <tr><th>Time: </th><td>{{timerDisplay}}s</td></tr>
             <tr><th>Score: </th><td>{{score}}</td></tr>
           </table>
         </div>    
@@ -54,12 +78,16 @@
         <h1 id="title">BubbleFizz</h1>
         <div id="gameButtonsDiv">
           <div id="bubblesGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles" 
+            <button v-on:click="startBubbles('bubbles')" 
             id="startBubblesButton" 
             class="startGameButton">Play Bubbles</button>
+            <br />
+            <button class="popup" 
+            onclick="showPopup('bubblesInstructions')">
+            Bubbles Instructions</button>
           </div>
           <div id="fizzGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles" 
+            <button v-on:click="startBubbles('fizz')" 
             id="startFizzButton"
             class="startGameButton">Play Fizz</button>
             <br />
@@ -68,11 +96,18 @@
             Fizz Instructions</button>
           </div>
           <div id="impactGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles" 
+            <button v-on:click="startBubbles('impact')" 
             id="startImpactButton" 
             class="startGameButton">Play Impact</button>
+            <br />
+            <button class="popup" 
+            onclick="showPopup('impactInstructions')">
+            Impact Instructions</button>
           </div>
         </div>
+        <footer>
+          <a href="https://github.com/jrt781/bubble-fizz">Github classroom link</a>
+        </footer>
       </div>      
       
       
@@ -86,10 +121,7 @@
       
     </div> <!-- END VUE ELEMENT -->
     
-    
-    <footer>
-      <a href="https://github.com/jrt781/bubble-fizz">Github classroom link</a>
-    </footer>
+  
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>

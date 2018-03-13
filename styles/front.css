@@ -11,9 +11,6 @@
 
 .gameButtonDiv {
     display:inline-block;
-    background-color: blue;
-    border-color: black;
-    border-width: 2px;
     width: 30%;
 }
 
@@ -70,20 +67,34 @@
 }
 
 /* The actual popup */
-#fizzInstructions {
+.popuptext {
+  font-family: 'Montserrat', sans-serif;
   display: none;
   width: 50%;
   height: 50%;
-  background-color: #555;
-  color: #fff;
   text-align: center;
   border-radius: 15px;
   padding: 20px;
   position: absolute;
   z-index: 2;
-  font-size: 2em;
+  font-size: 1.5em;
   top: 25%;
   left: 25%;
+}
+
+#bubblesInstructions {
+  background-color: #44FF88;
+  color: black;
+}
+
+#fizzInstructions {
+  background-color: #6600CC;
+  color: white;
+}
+
+#impactInstructions {
+  background-color: #00FFFF;
+  color: black;
 }
 
 #backdrop {
