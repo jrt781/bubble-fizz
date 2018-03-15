@@ -14,7 +14,7 @@ var app = new Vue({
     gameDone: false,
     gameType: "bubbles",
     topten: [],
-    url: 'http://localhost:3000', // 'http://localhost:3000', 'http://159.89.34.246:3000'
+    url: 'http://159.89.34.246:3000', // 'http://localhost:3000', 'http://159.89.34.246:3000'
   },
   
   created() {
