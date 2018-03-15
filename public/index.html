@@ -37,10 +37,36 @@
 
 
 
+
     <div id="game">
       
       
-      
+      <div class="popuptext" id="topten">
+        <table>
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Score
+            </th>
+          </tr>
+          <tr v-for="(scoreItem, index) in topten">
+            <td>
+              {{index}}
+            </td>
+            <td>
+              {{scoreItem.name}}
+            </td>
+            <td>
+              {{scoreItem.score}}
+            </td>
+          </tr>
+        </table>
+      </div>
       
       
       
@@ -83,8 +109,12 @@
             class="startGameButton">Play Bubbles</button>
             <br />
             <button class="popup" 
-            onclick="showPopup('bubblesInstructions')">
+            v-on:click="showPopup('bubblesInstructions')">
             Bubbles Instructions</button>
+            <br />
+            <button class="popup" 
+              v-on:click="showPopup('topten')">
+            Bubbles Top Ten</button>
           </div>
           <div id="fizzGame" class="gameButtonDiv">
             <button v-on:click="startBubbles('fizz')" 
@@ -92,7 +122,7 @@
             class="startGameButton">Play Fizz</button>
             <br />
             <button class="popup" 
-            onclick="showPopup('fizzInstructions')">
+            v-on:click="showPopup('fizzInstructions')">
             Fizz Instructions</button>
           </div>
           <div id="impactGame" class="gameButtonDiv">
@@ -101,10 +131,11 @@
             class="startGameButton">Play Impact</button>
             <br />
             <button class="popup" 
-            onclick="showPopup('impactInstructions')">
+            v-on:click="showPopup('impactInstructions')">
             Impact Instructions</button>
           </div>
         </div>
+        
         <footer>
           <a href="https://github.com/jrt781/bubble-fizz">Github classroom link</a>
         </footer>
@@ -121,23 +152,7 @@
       
     </div> <!-- END VUE ELEMENT -->
     
-  
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
-    <script src="script.js"></script>
     <script>
-      function showPopup(id) {
-        var popup = document.getElementById(id);
-        popup.style.display = "block";
-        var backdrop = document.getElementById("backdrop");
-        backdrop.style.display = "block";
-        var exit = document.getElementById("exitPopup");
-        exit.style.display = "block";
-        exit.onclick = function(){ closePopup(id); }
-      }
-      
       function closePopup(id) {
         var popup = document.getElementById(id);
         popup.style.display = "none";
@@ -147,5 +162,10 @@
         exit.style.display = "none";
       }
     </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js" integrity="sha256-pU9euBaEcVl8Gtg+FRYCtin2vKLN8sx5/4npZDmY2VA=" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
   </body>
 </html>

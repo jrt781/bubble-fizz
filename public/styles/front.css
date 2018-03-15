@@ -27,9 +27,19 @@
   font-family: 'Righteous', cursive;
 }
 
-#startBubblesButton {
+#topten {
+  text-align: center;
+}
+
+#topten table tr td {
+  background-color: white;
+  color: black;
+}
+
+#startBubblesButton, #topten {
   background-color: #4488FF;
   color: white;
+  padding: 5px;
 } 
 
 #startFizzButton {
