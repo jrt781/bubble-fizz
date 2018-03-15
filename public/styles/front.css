@@ -5,6 +5,8 @@
   padding-bottom: 0;
 }
 
+/* --- START BUTTONS -------------------------------------------------------- */
+
 #gameButtonsDiv {
     text-align:center;
 }
@@ -27,19 +29,9 @@
   font-family: 'Righteous', cursive;
 }
 
-#topten {
-  text-align: center;
-}
-
-#topten table tr td {
-  background-color: white;
-  color: black;
-}
-
-#startBubblesButton, #topten {
+#startBubblesButton {
   background-color: #4488FF;
   color: white;
-  padding: 5px;
 } 
 
 #startFizzButton {
@@ -67,75 +59,88 @@
   color: white;
 }
 
-/* --- INSTRUCTIONS --------------------------------------------------------- */
+/* --- POPUP STRUCTURE ------------------------------------------------------ */
 
-/* Popup container - can be anything you want */
-.popup {
+.popupButton {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
 
-/* The actual popup */
-.popuptext {
+.popup {
   font-family: 'Montserrat', sans-serif;
-  display: none;
   width: 50%;
+  height: auto;
   text-align: center;
   border-radius: 15px;
   padding: 20px;
   position: absolute;
   z-index: 2;
   font-size: 1.5em;
-  top: 25%;
-  left: 25%;
-}
-
-#bubblesInstructions {
-  background-color: #44FF88;
-  color: black;
-}
-
-#fizzInstructions {
-  background-color: #6600CC;
-  color: white;
-}
-
-#impactInstructions {
-  background-color: #00FFFF;
-  color: black;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 #backdrop {
-  display: none;
   background-color: black;
   opacity: 0.5;
   width: 100%;
   height: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
 }
 
-#exitPopup {
-  cursor: pointer;
-  display: none;
-  width: 30px;
-  height: 30px;
-  background-color: #eee;
+/* --- POPUPS STYLES -------------------------------------------------------- */
+
+#bubblesInstructions {
+  background-color: #44FF88;
   color: black;
-  text-align: center;
-  border-radius: 30px;
-  position: absolute;
-  z-index: 3;
-  top: calc(25% - 15px);
-  left: calc(25% - 15px);
-  font-size: 1.25em;
-  border-width: 4px;
-  border-color: black;
-  border-style: solid;
+  top: 25%;
 }
 
-#exitPopup:hover {
-  background-color: red;
+#fizzInstructions {
+  background-color: #6600CC;
   color: white;
+  top: 25%;
+}
+
+#impactInstructions {
+  background-color: #00FFFF;
+  color: black;
+  top: 25%;
+}
+
+#topten {
+  background-color: #0000FF;
+  color: white;
+  top: 2em;
+}
+
+/* --- TOP TEN TABLE -------------------------------------------------------- */
+
+#topten table {
+  margin: auto; 
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+#topten table tbody :nth-child(odd) {
+    background-color: white;
+}
+
+#topten table tbody tr:nth-child(even) td {
+    background-color: #AACCFF;
+}
+
+#topten table tbody tr td {
+  color: black;
+  padding: 0.25em 1em;
+  min-width: 2em;
+}
+
+#topten table tbody tr td:first-child {
+  min-width: 1em;
 }

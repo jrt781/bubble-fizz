@@ -15,7 +15,9 @@ var app = new Vue({
     gameDone: false,
     gameType: "bubbles",
     topten: [],
-    url: 'http://159.89.34.246:3001', // 'http://localhost:3001', 'http://159.89.34.246:3001'
+    popupVisible: false,
+    popupType: "bubbles",
+    url: 'http://localhost:3001', // 'http://localhost:3001', 'http://159.89.34.246:3001'
   },
   
   created() {
@@ -31,21 +33,29 @@ var app = new Vue({
     },
     
     showPopup: function(id) {
-      if (id == "topten") {
-        axios.get(this.url + "/api/scores/" + this.gameType).then(response => {
+      if (id == "toptenBubbles" || id == "toptenFizz" || id == "toptenImpact") {
+        var toptenType = "bubbles";
+        if (id == "toptenFizz") {
+          toptenType = "fizz";
+        } else if (id == "toptenImpact") {
+          toptenType = "impact";
+        }
+        axios.get(this.url + "/api/scores/" + toptenType).then(response => {
           this.topten = response.data;
+          this.popupType = "topten";
+          this.popupVisible = true;
           return true;
         }).catch(err => {
           console.log("error getting topten");
         });
+      } else {
+        this.popupType = id;
+        this.popupVisible = true;        
       }
-      var popup = document.getElementById(id);
-      popup.style.display = "block";
-      var backdrop = document.getElementById("backdrop");
-      backdrop.style.display = "block";
-      var exit = document.getElementById("exitPopup");
-      exit.style.display = "block";
-      exit.onclick = "closePopup(id);"
+    },
+    
+    closePopup: function() {
+      this.popupVisible = false;
     },
     
     popBubble: function(index) {
@@ -116,7 +126,7 @@ var app = new Vue({
       this.timer = 15;
       this.interval = setInterval(function () {
         // Timer
-        v.timer -= 0.015;
+        v.timer -= 0.01;
         
         // End game: out of time
         if (v.timer <= 0) {

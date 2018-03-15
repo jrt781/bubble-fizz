@@ -7,9 +7,42 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static('public'))
 
-let bubblesScores = [];
-let fizzScores = [];
-let impactScores = [];
+let bubblesScores = [
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}
+];
+let fizzScores = [
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}
+];
+let impactScores = [
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}, 
+  {name:'', score: 0}
+];
 let id = 0;
 
 app.get('/api/scores/:gameType', (req, res) => {
@@ -32,7 +65,7 @@ app.post('/api/scores/:gameType', (req, res) => {
   } else if (gameType == "impact") {
     scores = impactScores;
   } 
-  if (scores.length == 0) {
+  if (scores.length != 0) {
     scores.pop();
   }
   scores.push(item);

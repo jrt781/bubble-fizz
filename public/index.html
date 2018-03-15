@@ -9,63 +9,50 @@
     <title>Bubbles</title>
   </head>
   <body>
-    <div id="backdrop"></div>
-    <div id="exitPopup">x</div>
-    <div class="popuptext" id="bubblesInstructions">
-      You have 15 seconds to pop as many bubbles (by clicking them) 
-      and get as many points as you can! When you pop bubbles, new 
-      ones appear. Smaller bubbles are worth more points. Try to get 
-      the highest score possible!
-    </div>
-    <div class="popuptext" id="fizzInstructions">
-      You have 15 seconds to pop as many bubbles (by clicking them) 
-      and get as many points as you can! When you pop bubbles, new 
-      ones appear. <b>The bubbles will be moving and bouncing around.</b> 
-      Smaller bubbles are worth more points, <b>as well as bubbles that 
-      are moving faster.</b> Try to get the highest score possible!
-    </div>
-    <div class="popuptext" id="impactInstructions">
-      You have 15 seconds to pop as many bubbles (by clicking them) 
-      and get as many points as you can! When you pop bubbles, new 
-      ones appear. Smaller bubbles are worth more points. <b>When you 
-      pop a bubble, it will push all the other bubbles away.</b> Try to 
-      get the highest score possible!
-    </div>
-
-
-
-
-
-
 
     <div id="game">
-      
-      
-      <div class="popuptext" id="topten">
-        <table>
-          <tr>
-            <th>
-              #
-            </th>
-            <th>
-              Name
-            </th>
-            <th>
-              Score
-            </th>
-          </tr>
-          <tr v-for="(scoreItem, index) in topten">
-            <td>
-              {{index}}
-            </td>
-            <td>
-              {{scoreItem.name}}
-            </td>
-            <td>
-              {{scoreItem.score}}
-            </td>
-          </tr>
-        </table>
+      <div id="popus" v-if="popupVisible">
+        <div id="backdrop" v-on:click="closePopup()"></div>
+        <div class="popup instructionsPopup" id="bubblesInstructions" v-if="popupType == 'bubblesInstructions'">
+          You have 15 seconds to pop as many bubbles (by clicking them) 
+          and get as many points as you can! When you pop bubbles, new 
+          ones appear. Smaller bubbles are worth more points. Try to get 
+          the highest score possible! <br /><i>(Click outside to return)</i>
+        </div>
+        <div class="popup instructionsPopup" id="fizzInstructions" v-if="popupType == 'fizzInstructions'">
+          You have 15 seconds to pop as many bubbles (by clicking them) 
+          and get as many points as you can! When you pop bubbles, new 
+          ones appear. <b>The bubbles will be moving and bouncing around.</b> 
+          Smaller bubbles are worth more points, <b>as well as bubbles that 
+          are moving faster.</b> Try to get the highest score possible! 
+          <br /><i>(Click outside to return)</i>
+        </div>
+        <div class="popup instructionsPopup" id="impactInstructions" v-if="popupType == 'impactInstructions'">
+          You have 15 seconds to pop as many bubbles (by clicking them) 
+          and get as many points as you can! When you pop bubbles, new 
+          ones appear. Smaller bubbles are worth more points. <b>When you 
+          pop a bubble, it will push all the other bubbles away.</b> Try to 
+          get the highest score possible! <br /><i>(Click outside to return)</i>
+        </div>
+        
+        <div class="popup" id="topten" v-if="popupType == 'topten'">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(scoreItem, index) in topten">
+                <td>{{index+1}}</td>
+                <td>{{scoreItem.name}}</td>
+                <td>{{scoreItem.score}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       
       
@@ -80,10 +67,8 @@
             <tr><th>Score: </th><td>{{score}}</td></tr>
           </table>
         </div>    
-        <div v-for="(bubble, index) in bubbles"
-         :style="'width:'+bubble.size+'px;height:'+bubble.size+'px;top:'+bubble.y+'px;left:'+bubble.x+'px;background-color:'+bubble.color+';'" 
-         class="bubble" 
-         v-on:click="popBubble(index)"></div>
+        <div v-for="(bubble, index) in bubbles" class="bubble" v-on:click="popBubble(index)"
+         :style="'width:'+bubble.size+'px;height:'+bubble.size+'px;top:'+bubble.y+'px;left:'+bubble.x+'px;background-color:'+bubble.color+';'"></div>
         <div id="gameDoneDiv" v-if="gameDone">
           <h1>Final score: {{score}}</h1>
           <h2>Press the spacebar to continue</h2>
@@ -104,35 +89,25 @@
         <h1 id="title">BubbleFizz</h1>
         <div id="gameButtonsDiv">
           <div id="bubblesGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles('bubbles')" 
-            id="startBubblesButton" 
-            class="startGameButton">Play Bubbles</button>
+            <button v-on:click="startBubbles('bubbles')" id="startBubblesButton" class="startGameButton">Play Bubbles</button>
             <br />
-            <button class="popup" 
-            v-on:click="showPopup('bubblesInstructions')">
-            Bubbles Instructions</button>
+            <button class="popupButton" v-on:click="showPopup('bubblesInstructions')">Bubbles Instructions</button>
             <br />
-            <button class="popup" 
-              v-on:click="showPopup('topten')">
-            Bubbles Top Ten</button>
+            <button class="popupButton" v-on:click="showPopup('toptenBubbles')">Bubbles Top Ten</button>
           </div>
           <div id="fizzGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles('fizz')" 
-            id="startFizzButton"
-            class="startGameButton">Play Fizz</button>
+            <button v-on:click="startBubbles('fizz')" id="startFizzButton" class="startGameButton">Play Fizz</button>
             <br />
-            <button class="popup" 
-            v-on:click="showPopup('fizzInstructions')">
-            Fizz Instructions</button>
+            <button class="popupButton" v-on:click="showPopup('fizzInstructions')">Fizz Instructions</button>
+            <br />
+            <button class="popupButton" v-on:click="showPopup('toptenFizz')">Fizz Top Ten</button>
           </div>
           <div id="impactGame" class="gameButtonDiv">
-            <button v-on:click="startBubbles('impact')" 
-            id="startImpactButton" 
-            class="startGameButton">Play Impact</button>
+            <button v-on:click="startBubbles('impact')" id="startImpactButton" class="startGameButton">Play Impact</button>
             <br />
-            <button class="popup" 
-            v-on:click="showPopup('impactInstructions')">
-            Impact Instructions</button>
+            <button class="popupButton" v-on:click="showPopup('impactInstructions')">Impact Instructions</button>
+            <br />
+            <button class="popupButton" v-on:click="showPopup('toptenImpact')">Impact Top Ten</button>
           </div>
         </div>
         
@@ -151,17 +126,6 @@
       
       
     </div> <!-- END VUE ELEMENT -->
-    
-    <script>
-      function closePopup(id) {
-        var popup = document.getElementById(id);
-        popup.style.display = "none";
-        var backdrop = document.getElementById("backdrop");
-        backdrop.style.display = "none";
-        var exit = document.getElementById("exitPopup");
-        exit.style.display = "none";
-      }
-    </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
