@@ -17,7 +17,7 @@ var app = new Vue({
     topten: [],
     popupVisible: false,
     popupType: "bubbles",
-    url: 'http://localhost:3001', // 'http://localhost:3001', 'http://159.89.34.246:3001'
+    url: 'http://159.89.34.246:3001', // 'http://localhost:3001', 'http://159.89.34.246:3001'
   },
   
   created() {
